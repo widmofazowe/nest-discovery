@@ -1,5 +1,5 @@
-import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { DiscoveryService as NestjsDiscoveryService } from '@nestjs/core';
+import { Injectable, OnModuleInit } from '@nestjs/common';
+import { DiscoveryService } from '@nestjs/core';
 import iterate from 'iterare';
 import { DISCOVER_METADATA_KEY } from './discoverable.decorator';
 
@@ -10,10 +10,10 @@ type InstanceWrapper = {
 };
 
 @Injectable()
-export class DiscoveryService implements OnModuleInit {
+export class DiscoverableService implements OnModuleInit {
   private providers: Record<string | symbol, unknown[]> = {};
 
-  constructor(private discoveryService: NestjsDiscoveryService) {}
+  constructor(private discoveryService: DiscoveryService) {}
 
   public getProviders<T extends unknown[]>(key?: string | symbol): T {
     const providers = key ? this.providers[key] : Object.values(this.providers).flat();
@@ -21,7 +21,7 @@ export class DiscoveryService implements OnModuleInit {
     return (providers || []) as T;
   }
 
-  onModuleInit(): void {
+  onModuleInit() {
     this.providers = this.scanDiscoverableInstanceWrappers(this.discoveryService.getProviders());
   }
 

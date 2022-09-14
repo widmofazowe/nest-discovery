@@ -1,3 +1,3 @@
 export { Discoverable } from './discoverable.decorator';
-export { DiscoveryModule } from './discovery.module';
-export { DiscoveryService } from './discovery.service';
+export { DiscoverableModule } from './discoverable.module';
+export { DiscoverableService } from './discoverable.service';
