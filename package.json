@@ -1,0 +1,44 @@
+{
+  "name": "nest-discovery",
+  "version": "1.0.0",
+  "description": "NestJS Discovery Module",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "lint": "eslint \"{src,test}/**/*.ts\" --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/widmofazowe/nest-discovery.git"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "author": "widmo",
+  "keywords": [
+    "widmo",
+    "nestjs",
+    "discovery",
+    "module"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/widmofazowe/nest-discovery/issues"
+  },
+  "homepage": "https://github.com/widmofazowe/nest-discovery#readme",
+  "dependencies": {
+    "@nestjs/common": "^9.0.11",
+    "@nestjs/core": "^9.0.11"
+  },
+  "devDependencies": {
+    "eslint": "^8.23.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.7.1",
+    "typescript": "^4.8.2"
+  }
+}
