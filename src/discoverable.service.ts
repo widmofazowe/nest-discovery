@@ -21,6 +21,10 @@ export class DiscoverableService implements OnModuleInit {
     return (providers || []) as T;
   }
 
+  public getKeys(): string[] {
+    return Object.keys(this.providers);
+  }
+
   onModuleInit() {
     this.providers = this.scanDiscoverableInstanceWrappers(this.discoveryService.getProviders());
   }
