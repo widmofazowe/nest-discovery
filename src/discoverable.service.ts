@@ -10,12 +10,15 @@ type InstanceWrapper = {
 };
 
 @Injectable()
-export class DiscoverableService implements OnModuleInit {
-  private providers: Record<string | symbol, unknown[]> = {};
+export class DiscoverableService {
+  private providers: Record<string | symbol, unknown[]>;
 
   constructor(private discoveryService: DiscoveryService) {}
 
   public getProviders<T extends unknown[]>(key?: string | symbol): T {
+    if (!this.providers) {
+      this.providers = this.scanDiscoverableInstanceWrappers(this.discoveryService.getProviders());
+    }
     const providers = key ? this.providers[key] : Object.values(this.providers).flat();
 
     return (providers || []) as T;
@@ -23,10 +26,6 @@ export class DiscoverableService implements OnModuleInit {
 
   public getKeys(): string[] {
     return Object.keys(this.providers);
-  }
-
-  onModuleInit() {
-    this.providers = this.scanDiscoverableInstanceWrappers(this.discoveryService.getProviders());
   }
 
   private scanDiscoverableInstanceWrappers(wrappers: InstanceWrapper[]) {
